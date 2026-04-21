@@ -5,1072 +5,479 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Αξιολόγηση B2B – Pharmastock S.A.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green-deep: #14523a;
-    --green-mid:  #1e7a54;
-    --green-soft: #2d9e6b;
-    --green-pale: #e6f5ed;
-    --green-mist: #f2faf6;
-    --orange:     #e8601c;
-    --orange-pale:#fff3ec;
-    --text-dark:  #111a15;
-    --text-mid:   #3d5449;
-    --text-muted: #7a9186;
-    --border:     #d4e5da;
-    --white:      #ffffff;
-    --bg:         #f4f8f5;
-  }
-
-  * { margin:0; padding:0; box-sizing:border-box; }
-
-  body {
-    background: var(--bg);
-    font-family: 'DM Sans', sans-serif;
-    color: var(--text-dark);
-    min-height: 100vh;
-  }
-
-  /* ── HEADER ── */
-  .header {
-    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 60%, #1a8c5c 100%);
-    padding: 48px 24px 80px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.06) 0%, transparent 40%);
-  }
-  .header-logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 40px;
-    padding: 8px 18px 8px 10px;
-    margin-bottom: 32px;
-    position: relative;
-  }
-  .header-logo-hex {
-    width: 36px; height: 36px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .header-logo span {
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-  }
-  .header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(26px, 5vw, 40px);
-    color: #fff;
-    line-height: 1.15;
-    margin-bottom: 14px;
-    position: relative;
-  }
-  .header p {
-    color: rgba(255,255,255,0.8);
-    font-size: 15px;
-    line-height: 1.7;
-    max-width: 480px;
-    margin: 0 auto 24px;
-    position: relative;
-  }
-  .header-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.25);
-    color: rgba(255,255,255,0.9);
-    font-size: 12px;
-    font-weight: 500;
-    padding: 6px 16px;
-    border-radius: 20px;
-    position: relative;
-  }
-
-  /* ── PROGRESS ── */
-  .progress-wrap {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 0 24px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 12px rgba(20,82,58,0.07);
-  }
-  .progress-inner {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 14px 0;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .progress-bar-track {
-    flex: 1;
-    height: 6px;
-    background: var(--green-pale);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--green-mid), var(--green-soft));
-    border-radius: 10px;
-    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-    width: 0%;
-  }
-  .progress-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--green-mid);
-    min-width: 60px;
-    text-align: right;
-  }
-
-  /* ── FORM CONTAINER ── */
-  .form-container {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
-    margin-top: -32px;
-  }
-
-  /* ── SECTIONS ── */
-  .section {
-    background: var(--white);
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    padding: 32px;
-    margin-bottom: 20px;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.5s forwards;
-    box-shadow: 0 2px 16px rgba(20,82,58,0.05);
-  }
-  @keyframes fadeUp {
-    to { opacity:1; transform:translateY(0); }
-  }
-  .section:nth-child(1) { animation-delay: 0.05s; }
-  .section:nth-child(2) { animation-delay: 0.12s; }
-  .section:nth-child(3) { animation-delay: 0.19s; }
-  .section:nth-child(4) { animation-delay: 0.26s; }
-  .section:nth-child(5) { animation-delay: 0.33s; }
-  .section:nth-child(6) { animation-delay: 0.40s; }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--green-pale);
-  }
-  .section-icon {
-    width: 42px; height: 42px;
-    background: var(--green-pale);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-  .section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    color: var(--text-dark);
-  }
-  .section-subtitle {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 2px;
-    font-weight: 400;
-  }
-
-  /* ── QUESTIONS ── */
-  .question {
-    margin-bottom: 28px;
-  }
-  .question:last-child { margin-bottom: 0; }
-
-  .q-label {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-bottom: 12px;
-    line-height: 1.5;
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  .q-label .q-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px; height: 22px;
-    background: var(--green-pale);
-    color: var(--green-mid);
-    border-radius: 50%;
-    font-size: 11px;
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .q-required {
-    color: var(--orange);
-    font-size: 13px;
-    margin-left: 2px;
-  }
-
-  /* ── STAR RATING ── */
-  .stars {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .star-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 28px;
-    color: #d4e5da;
-    transition: color 0.15s, transform 0.15s;
-    line-height: 1;
-    padding: 2px;
-  }
-  .star-btn:hover,
-  .star-btn.active {
-    color: #f0a500;
-    transform: scale(1.15);
-  }
-  .star-btn.active ~ .star-btn {
-    color: #d4e5da;
-  }
-  .stars:has(.star-btn:hover) .star-btn {
-    color: #d4e5da;
-  }
-  .stars:has(.star-btn:nth-child(1):hover) .star-btn:nth-child(1),
-  .stars:has(.star-btn:nth-child(2):hover) .star-btn:nth-child(-n+2),
-  .stars:has(.star-btn:nth-child(3):hover) .star-btn:nth-child(-n+3),
-  .stars:has(.star-btn:nth-child(4):hover) .star-btn:nth-child(-n+4),
-  .stars:has(.star-btn:nth-child(5):hover) .star-btn:nth-child(-n+5) {
-    color: #f0a500;
-  }
-  .star-hint {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 6px;
-  }
-
-  /* ── RADIO / CHECKBOX ── */
-  .options-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
-  }
-  .options-grid.single-col {
-    grid-template-columns: 1fr;
-  }
-  .option-item {
-    position: relative;
-  }
-  .option-item input {
-    position: absolute;
-    opacity: 0;
-    width: 0; height: 0;
-  }
-  .option-item label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--text-mid);
-    transition: all 0.15s;
-    background: var(--white);
-    line-height: 1.4;
-  }
-  .option-item label:hover {
-    border-color: var(--green-soft);
-    background: var(--green-mist);
-  }
-  .option-item input:checked + label {
-    border-color: var(--green-mid);
-    background: var(--green-pale);
-    color: var(--green-deep);
-    font-weight: 500;
-  }
-  .option-check {
-    width: 18px; height: 18px;
-    border: 1.5px solid var(--border);
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.15s;
-    background: var(--white);
-  }
-  .option-item input:checked + label .option-check {
-    background: var(--green-mid);
-    border-color: var(--green-mid);
-  }
-  .option-item input:checked + label .option-check::after {
-    content: '';
-    width: 6px; height: 6px;
-    background: white;
-    border-radius: 50%;
-    display: block;
-  }
-  /* checkbox variant */
-  .option-item.checkbox label { }
-  .option-item.checkbox .option-check {
-    border-radius: 5px;
-  }
-  .option-item.checkbox input:checked + label .option-check::after {
-    content: '✓';
-    width: auto; height: auto;
-    background: none;
-    border-radius: 0;
-    color: white;
-    font-size: 11px;
-    font-weight: 700;
-  }
-
-  /* ── NPS SCALE ── */
-  .nps-scale {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .nps-btn {
-    width: 46px; height: 46px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    background: var(--white);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .nps-btn:hover {
-    border-color: var(--green-soft);
-    background: var(--green-pale);
-    color: var(--green-deep);
-  }
-  .nps-btn.selected {
-    background: var(--green-mid);
-    border-color: var(--green-mid);
-    color: white;
-  }
-  .nps-btn[data-v="0"].selected, .nps-btn[data-v="1"].selected,
-  .nps-btn[data-v="2"].selected, .nps-btn[data-v="3"].selected,
-  .nps-btn[data-v="4"].selected, .nps-btn[data-v="5"].selected,
-  .nps-btn[data-v="6"].selected {
-    background: #c0392b; border-color: #c0392b;
-  }
-  .nps-btn[data-v="7"].selected, .nps-btn[data-v="8"].selected {
-    background: #e8940a; border-color: #e8940a;
-  }
-  .nps-labels {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 8px;
-    font-size: 11px;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  /* ── TEXTAREA ── */
-  textarea {
-    width: 100%;
-    padding: 14px 16px;
-    border: 1.5px solid var(--border);
-    border-radius: 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--text-dark);
-    resize: vertical;
-    min-height: 100px;
-    transition: border-color 0.15s;
-    background: var(--white);
-    line-height: 1.6;
-  }
-  textarea:focus {
-    outline: none;
-    border-color: var(--green-mid);
-    box-shadow: 0 0 0 3px rgba(45,158,107,0.1);
-  }
-  textarea::placeholder { color: #b0c4bb; }
-
-  /* ── TEXT INPUT ── */
-  input[type="text"], input[type="email"] {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--text-dark);
-    transition: border-color 0.15s;
-    background: var(--white);
-  }
-  input[type="text"]:focus, input[type="email"]:focus {
-    outline: none;
-    border-color: var(--green-mid);
-    box-shadow: 0 0 0 3px rgba(45,158,107,0.1);
-  }
-  input::placeholder { color: #b0c4bb; }
-
-  /* ── SUBMIT ── */
-  .submit-section {
-    text-align: center;
-    padding: 12px 0 8px;
-  }
-  .submit-btn {
-    background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
-    color: white;
-    border: none;
-    padding: 16px 52px;
-    border-radius: 50px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 4px 20px rgba(20,82,58,0.25);
-    letter-spacing: 0.2px;
-  }
-  .submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(20,82,58,0.35);
-  }
-  .submit-btn:active { transform: translateY(0); }
-  .submit-note {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 12px;
-  }
-
-  /* ── THANK YOU ── */
-  .thankyou {
-    display: none;
-    text-align: center;
-    padding: 60px 32px;
-    background: var(--white);
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 16px rgba(20,82,58,0.05);
-  }
-  .thankyou.visible { display: block; }
-  .thankyou-icon {
-    width: 80px; height: 80px;
-    background: var(--green-pale);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 36px;
-    margin: 0 auto 24px;
-    animation: pop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
-  }
-  @keyframes pop {
-    from { transform: scale(0); opacity:0; }
-    to   { transform: scale(1); opacity:1; }
-  }
-  .thankyou h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 28px;
-    color: var(--green-deep);
-    margin-bottom: 12px;
-  }
-  .thankyou p {
-    font-size: 15px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-
-  /* ── ERROR STATE ── */
-  .field-error {
-    font-size: 12px;
-    color: #c0392b;
-    margin-top: 6px;
-    display: none;
-  }
-  .question.has-error .star-btn,
-  .question.has-error .nps-btn { border-color: #f5b7b1 !important; }
-  .question.has-error textarea,
-  .question.has-error input {
-    border-color: #e74c3c !important;
-    box-shadow: 0 0 0 3px rgba(231,76,60,0.1) !important;
-  }
-  .question.has-error .field-error { display: block; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 500px) {
-    .section { padding: 24px 18px; }
-    .options-grid { grid-template-columns: 1fr; }
-    .nps-btn { width: 38px; height: 38px; font-size: 12px; }
-    .header { padding: 36px 18px 64px; }
-  }
+:root{--g-deep:#14523a;--g-mid:#1e7a54;--g-soft:#2d9e6b;--g-pale:#e6f5ed;--g-mist:#f2faf6;--orange:#e8601c;--text-dark:#111a15;--text-mid:#3d5449;--text-muted:#7a9186;--border:#d4e5da;--white:#fff;--bg:#f4f8f5;--red:#d9534f;--gold:#fbbf24}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text-dark);line-height:1.5;-webkit-font-smoothing:antialiased}
+.progress-wrap{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:10px 20px}
+.progress-bar{max-width:760px;margin:0 auto;height:6px;background:var(--g-pale);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--g-mid),var(--g-soft));width:0%;transition:width .3s}
+.progress-label{max-width:760px;margin:4px auto 0;font-size:12px;color:var(--text-muted);text-align:right}
+.hero{background:linear-gradient(135deg,var(--g-deep),var(--g-mid));color:white;padding:48px 20px;text-align:center}
+.hero-inner{max-width:760px;margin:0 auto}
+.hero h1{font-family:'DM Serif Display',serif;font-size:36px;font-weight:400;margin-bottom:12px;line-height:1.2}
+.hero p{font-size:16px;opacity:.95;max-width:560px;margin:0 auto 18px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);padding:8px 16px;border-radius:20px;font-size:14px}
+form{max-width:760px;margin:0 auto;padding:28px 20px}
+.section{background:white;border-radius:14px;margin-bottom:18px;overflow:hidden;box-shadow:0 2px 8px rgba(20,82,58,.06)}
+.sec-head{background:var(--g-mist);padding:14px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.sec-num{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;background:var(--g-mid);color:white;border-radius:50%;font-weight:600;font-size:13px}
+.sec-title{font-family:'DM Serif Display',serif;font-size:19px;color:var(--g-deep);font-weight:400}
+.sec-body{padding:18px 22px}
+.q{padding:14px 0;border-bottom:1px solid var(--g-pale)}
+.q:last-child{border-bottom:none;padding-bottom:0}
+.q:first-child{padding-top:0}
+.q-label{display:block;font-weight:500;font-size:14.5px;color:var(--text-dark);margin-bottom:10px;line-height:1.45}
+.q-req::after{content:" *";color:var(--orange);font-weight:700}
+.stars{display:inline-flex;gap:2px;direction:ltr;user-select:none}
+.stars span{cursor:pointer;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;color:#d4d4d4;font-size:30px;transition:color .1s,transform .1s;line-height:1}
+.stars span:hover{transform:scale(1.1)}
+.stars span.filled{color:var(--gold)}
+.stars-endpoints{display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-top:4px;max-width:190px}
+.nps{display:flex;gap:4px;flex-wrap:wrap}
+.nps label{cursor:pointer;min-width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--border);border-radius:8px;font-weight:600;font-size:13px;color:var(--text-mid);transition:all .1s;flex:1}
+.nps label:hover{border-color:var(--g-mid);color:var(--g-mid)}
+.nps input{display:none}
+.nps input:checked+label{background:var(--g-mid);border-color:var(--g-mid);color:white}
+.nps-endpoints{display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-top:6px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills input{display:none}
+.pills label{cursor:pointer;padding:8px 14px;border:2px solid var(--border);border-radius:20px;font-size:13.5px;color:var(--text-mid);transition:all .1s;background:white}
+.pills label:hover{border-color:var(--g-mid);color:var(--g-mid)}
+.pills input:checked+label{background:var(--g-mid);border-color:var(--g-mid);color:white}
+.checks{display:grid;gap:8px}
+.check-opt{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:all .1s;font-size:14px;background:white}
+.check-opt:hover{border-color:var(--g-mid);background:var(--g-mist)}
+.check-opt input{width:18px;height:18px;accent-color:var(--g-mid);cursor:pointer;flex-shrink:0}
+textarea,input[type=text],input[type=email]{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:14px;background:white;transition:border-color .1s;color:var(--text-dark)}
+textarea{min-height:72px;resize:vertical}
+textarea:focus,input[type=text]:focus,input[type=email]:focus{outline:none;border-color:var(--g-mid);box-shadow:0 0 0 3px rgba(30,122,84,.1)}
+.reason-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:none;border:none;color:var(--g-mid);cursor:pointer;font-family:inherit;font-size:13px;font-weight:500;padding:4px 0}
+.reason-btn:hover{color:var(--g-deep)}
+.reason-btn .plus{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border:1.5px solid currentColor;border-radius:50%;font-size:14px;line-height:1;font-weight:400}
+.reason-btn.open .plus{transform:rotate(45deg)}
+.reason-wrap{display:none;margin-top:10px}
+.reason-wrap.open{display:block}
+.cond{display:none;margin-top:10px}
+.cond.open{display:block}
+.submit-wrap{text-align:center;padding:20px}
+.submit-btn{background:linear-gradient(135deg,var(--g-mid),var(--g-soft));color:white;border:none;padding:15px 46px;border-radius:30px;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;box-shadow:0 4px 12px rgba(30,122,84,.3);transition:transform .1s}
+.submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(30,122,84,.4)}
+.submit-btn:disabled{opacity:.6;cursor:wait}
+#thankyou{display:none;text-align:center;padding:60px 20px;max-width:520px;margin:0 auto}
+#thankyou.show{display:block}
+#thankyou .icon{width:80px;height:80px;margin:0 auto 20px;background:var(--g-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--g-mid);font-size:42px}
+#thankyou h2{font-family:'DM Serif Display',serif;font-size:28px;color:var(--g-deep);margin-bottom:12px;font-weight:400}
+#thankyou p{color:var(--text-mid);margin-bottom:10px}
+.footer{text-align:center;padding:30px 20px;color:var(--text-muted);font-size:13px}
+.footer strong{color:var(--g-deep)}
+.has-error .q-label{color:var(--red)}
+@media (max-width:600px){.hero{padding:38px 16px}.hero h1{font-size:28px}.hero p{font-size:15px}.sec-head{padding:12px 16px}.sec-body{padding:14px 16px}.nps label{min-width:30px;height:34px;font-size:12px}.nps{gap:3px}.stars span{width:32px;height:32px;font-size:28px}.submit-btn{padding:14px 36px;font-size:15px}}
 </style>
 </head>
 <body>
-
-<!-- HEADER -->
-<div class="header">
-  <div class="header-logo">
-    <div class="header-logo-hex">⚕️</div>
-    <span>PHARMASTOCK S.A.</span>
-  </div>
-  <h1>Βοηθήστε μας να βελτιώσουμε<br>το B2B σας</h1>
-  <p>Η γνώμη σας είναι πολύτιμη. Χρειαζόμαστε μόνο 3–4 λεπτά από τον χρόνο σας.</p>
-  <div class="header-badge">⏱ ~3 λεπτά &nbsp;·&nbsp; 100% ανώνυμο</div>
-</div>
-
-<!-- PROGRESS -->
 <div class="progress-wrap">
-  <div class="progress-inner">
-    <div class="progress-bar-track">
-      <div class="progress-bar-fill" id="progressFill"></div>
-    </div>
-    <div class="progress-label" id="progressLabel">0%</div>
-  </div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-label"><span id="progressLabel">0%</span> συμπληρωμένο</div>
 </div>
-
-<!-- FORM -->
-<div class="form-container">
+<div class="hero">
+<div class="hero-inner">
+<h1>Αξιολόγηση B2B Pharmastock</h1>
+<p>Η γνώμη σας μάς βοηθά να βελτιώσουμε την πλατφόρμα. Όσο πιο ειλικρινείς, τόσο πιο χρήσιμες οι απαντήσεις σας.</p>
+<span class="hero-badge">⏱ 5-7 λεπτά · Ανώνυμο</span>
+</div>
+</div>
 <form id="surveyForm" novalidate>
 
-  <!-- ══ SECTION 1: General ══ -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-icon">🌟</div>
-      <div>
-        <div class="section-title">Γενική Εντύπωση</div>
-        <div class="section-subtitle">Πώς νιώθετε συνολικά για το B2B;</div>
-      </div>
-    </div>
+<div class="section"><div class="sec-head"><div class="sec-num">1</div><div class="sec-title">Γενική εμπειρία χρήστη</div></div><div class="sec-body">
 
-    <!-- Q1: Overall satisfaction -->
-    <div class="question" id="q1">
-      <div class="q-label">
-        <span class="q-num">1</span>
-        <span>Πόσο ικανοποιημένοι είστε συνολικά από το B2B;<span class="q-required">*</span></span>
-      </div>
-      <div class="stars" id="stars-q1">
-        <button type="button" class="star-btn" data-val="1">★</button>
-        <button type="button" class="star-btn" data-val="2">★</button>
-        <button type="button" class="star-btn" data-val="3">★</button>
-        <button type="button" class="star-btn" data-val="4">★</button>
-        <button type="button" class="star-btn" data-val="5">★</button>
-      </div>
-      <div class="star-hint" id="star-hint-q1">Επιλέξτε από 1 (πολύ κακό) έως 5 (εξαιρετικό)</div>
-      <div class="field-error">Παρακαλώ επιλέξτε βαθμολογία.</div>
-      <input type="hidden" name="q1_overall" id="val-q1">
-    </div>
+<div class="q" id="q1-1"><label class="q-label q-req">Πώς θα περιγράφατε συνολικά την εμπειρία σας με το νέο B2B;</label>
+<div class="stars" data-target="val-1-1"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+<input type="hidden" name="1.1_συνολική_εμπειρία" id="val-1-1">
+<div class="stars-endpoints"><span>Πολύ κακή</span><span>Εξαιρετική</span></div>
+<button type="button" class="reason-btn" data-open="r-1-1"><span class="plus">+</span>Προσθέστε σχόλιο (προαιρετικό)</button>
+<div class="reason-wrap" id="r-1-1"><textarea name="1.1_σχόλιο" placeholder="Πείτε μας περισσότερα..."></textarea></div></div>
 
-    <!-- Q2: How often -->
-    <div class="question">
-      <div class="q-label"><span class="q-num">2</span><span>Πόσο συχνά χρησιμοποιείτε το B2B;</span></div>
-      <div class="options-grid">
-        <div class="option-item">
-          <input type="radio" name="q2_frequency" id="q2a" value="daily">
-          <label for="q2a"><span class="option-check"></span>Καθημερινά</label>
-        </div>
-        <div class="option-item">
-          <input type="radio" name="q2_frequency" id="q2b" value="weekly">
-          <label for="q2b"><span class="option-check"></span>Μερικές φορές/εβδομάδα</label>
-        </div>
-        <div class="option-item">
-          <input type="radio" name="q2_frequency" id="q2c" value="monthly">
-          <label for="q2c"><span class="option-check"></span>Μερικές φορές/μήνα</label>
-        </div>
-        <div class="option-item">
-          <input type="radio" name="q2_frequency" id="q2d" value="rarely">
-          <label for="q2d"><span class="option-check"></span>Σπάνια</label>
-        </div>
-      </div>
-    </div>
+<div class="q"><label class="q-label">Σε σύγκριση με τον προηγούμενο τρόπο παραγγελιών (τηλέφωνο / άλλο σύστημα), είναι...</label>
+<div class="pills">
+<input type="radio" id="c1a" name="1.2_σύγκριση" value="Πολύ καλύτερο"><label for="c1a">Πολύ καλύτερο</label>
+<input type="radio" id="c1b" name="1.2_σύγκριση" value="Καλύτερο"><label for="c1b">Καλύτερο</label>
+<input type="radio" id="c1c" name="1.2_σύγκριση" value="Περίπου το ίδιο"><label for="c1c">Περίπου το ίδιο</label>
+<input type="radio" id="c1d" name="1.2_σύγκριση" value="Χειρότερο"><label for="c1d">Χειρότερο</label>
+<input type="radio" id="c1e" name="1.2_σύγκριση" value="Πολύ χειρότερο"><label for="c1e">Πολύ χειρότερο</label>
+</div>
+<button type="button" class="reason-btn" data-open="r-1-2"><span class="plus">+</span>Προσθέστε σχόλιο (προαιρετικό)</button>
+<div class="reason-wrap" id="r-1-2"><textarea name="1.2_σχόλιο" placeholder="Τι συγκεκριμένα είναι καλύτερο ή χειρότερο;"></textarea></div></div>
 
-  </div>
+<div class="q"><label class="q-label">Θα το χρησιμοποιούσατε καθημερινά;</label>
+<div class="pills">
+<input type="radio" id="d1a" name="1.3_καθημερινά" value="Ναι"><label for="d1a">Ναι</label>
+<input type="radio" id="d1b" name="1.3_καθημερινά" value="Ίσως"><label for="d1b">Ίσως</label>
+<input type="radio" id="d1c" name="1.3_καθημερινά" value="Όχι"><label for="d1c">Όχι</label>
+</div>
+<button type="button" class="reason-btn" data-open="r-1-3"><span class="plus">+</span>Γιατί; (προαιρετικό)</button>
+<div class="reason-wrap" id="r-1-3"><textarea name="1.3_σχόλιο" placeholder="Εξηγήστε γιατί..."></textarea></div></div>
 
-  <!-- ══ SECTION 2: Usability ══ -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-icon">🖥️</div>
-      <div>
-        <div class="section-title">Ευχρηστία & Πλοήγηση</div>
-        <div class="section-subtitle">Πόσο εύκολο είναι να το χρησιμοποιείτε;</div>
-      </div>
-    </div>
+</div></div>
 
-    <!-- Q3: Ease of navigation -->
-    <div class="question" id="q3">
-      <div class="q-label"><span class="q-num">3</span><span>Πόσο εύκολη είναι η πλοήγηση στην πλατφόρμα;<span class="q-required">*</span></span></div>
-      <div class="stars" id="stars-q3">
-        <button type="button" class="star-btn" data-val="1">★</button>
-        <button type="button" class="star-btn" data-val="2">★</button>
-        <button type="button" class="star-btn" data-val="3">★</button>
-        <button type="button" class="star-btn" data-val="4">★</button>
-        <button type="button" class="star-btn" data-val="5">★</button>
-      </div>
-      <div class="star-hint" id="star-hint-q3">1 = Πολύ δύσκολη, 5 = Πολύ εύκολη</div>
-      <div class="field-error">Παρακαλώ επιλέξτε βαθμολογία.</div>
-      <input type="hidden" name="q3_navigation" id="val-q3">
-    </div>
+<div class="section"><div class="sec-head"><div class="sec-num">2</div><div class="sec-title">Πλοήγηση & ευχρηστία</div></div><div class="sec-body">
 
-    <!-- Q4: Search -->
-    <div class="question" id="q4">
-      <div class="q-label"><span class="q-num">4</span><span>Πόσο εύκολα βρίσκετε τα προϊόντα που ψάχνετε;<span class="q-required">*</span></span></div>
-      <div class="stars" id="stars-q4">
-        <button type="button" class="star-btn" data-val="1">★</button>
-        <button type="button" class="star-btn" data-val="2">★</button>
-        <button type="button" class="star-btn" data-val="3">★</button>
-        <button type="button" class="star-btn" data-val="4">★</button>
-        <button type="button" class="star-btn" data-val="5">★</button>
-      </div>
-      <div class="star-hint" id="star-hint-q4">1 = Πολύ δύσκολα, 5 = Πολύ εύκολα</div>
-      <div class="field-error">Παρακαλώ επιλέξτε βαθμολογία.</div>
-      <input type="hidden" name="q4_search" id="val-q4">
-    </div>
+<div class="q"><label class="q-label">Ήταν εύκολο να βρείτε αυτό που ψάχνατε;</label>
+<div class="stars" data-target="val-2-1"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+<input type="hidden" name="2.1_ευκολία_εύρεσης" id="val-2-1">
+<div class="stars-endpoints"><span>Πολύ δύσκολο</span><span>Πολύ εύκολο</span></div></div>
 
-    <!-- Q5: Device -->
-    <div class="question">
-      <div class="q-label"><span class="q-num">5</span><span>Από ποια συσκευή συνήθως χρησιμοποιείτε το B2B;</span></div>
-      <div class="options-grid">
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q5_device" id="q5a" value="desktop">
-          <label for="q5a"><span class="option-check"></span>Desktop / Laptop</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q5_device" id="q5b" value="tablet">
-          <label for="q5b"><span class="option-check"></span>Tablet</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q5_device" id="q5c" value="mobile">
-          <label for="q5c"><span class="option-check"></span>Κινητό τηλέφωνο</label>
-        </div>
-      </div>
-    </div>
+<div class="q"><label class="q-label">Υπήρξαν σημεία που "χαθήκατε" ή σας μπέρδεψαν;</label>
+<div class="pills">
+<input type="radio" id="y22a" name="2.2_χαθήκατε" value="Ναι" data-cond="c22"><label for="y22a">Ναι</label>
+<input type="radio" id="y22b" name="2.2_χαθήκατε" value="Όχι" data-cond=""><label for="y22b">Όχι</label>
+</div>
+<div class="cond" id="c22"><textarea name="2.2_περιγραφή" placeholder="Περιγράψτε τι σας μπέρδεψε ή καθυστέρησε..."></textarea></div></div>
 
-  </div>
+<div class="q"><label class="q-label">Τα μενού (π.χ. προσφορές, κατηγορίες) είναι ξεκάθαρα;</label>
+<div class="stars" data-target="val-2-3"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+<input type="hidden" name="2.3_μενού" id="val-2-3">
+<div class="stars-endpoints"><span>Καθόλου</span><span>Απόλυτα</span></div></div>
 
-  <!-- ══ SECTION 3: Orders ══ -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-icon">📦</div>
-      <div>
-        <div class="section-title">Παραγγελίες</div>
-        <div class="section-subtitle">Η εμπειρία σας με τη διαδικασία παραγγελίας</div>
-      </div>
-    </div>
+<div class="q"><label class="q-label">Αν μπορούσατε να αλλάξετε 1 πράγμα στην πλοήγηση, ποιο θα ήταν;</label>
+<textarea name="2.4_αλλαγή_πλοήγησης" placeholder="Προαιρετικό — γράψτε μια πρόταση..."></textarea></div>
 
-    <!-- Q6: Order process -->
-    <div class="question" id="q6">
-      <div class="q-label"><span class="q-num">6</span><span>Πόσο ομαλή είναι η διαδικασία υποβολής παραγγελίας;<span class="q-required">*</span></span></div>
-      <div class="stars" id="stars-q6">
-        <button type="button" class="star-btn" data-val="1">★</button>
-        <button type="button" class="star-btn" data-val="2">★</button>
-        <button type="button" class="star-btn" data-val="3">★</button>
-        <button type="button" class="star-btn" data-val="4">★</button>
-        <button type="button" class="star-btn" data-val="5">★</button>
-      </div>
-      <div class="star-hint" id="star-hint-q6">1 = Πολλά προβλήματα, 5 = Απόλυτα ομαλή</div>
-      <div class="field-error">Παρακαλώ επιλέξτε βαθμολογία.</div>
-      <input type="hidden" name="q6_orders" id="val-q6">
-    </div>
+</div></div>
 
-    <!-- Q7: Issues experienced -->
-    <div class="question">
-      <div class="q-label"><span class="q-num">7</span><span>Αντιμετωπίσατε κάποιο από τα παρακάτω προβλήματα; <em style="font-weight:400;color:var(--text-muted)">(επιλέξτε όσα ισχύουν)</em></span></div>
-      <div class="options-grid single-col">
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q7_issues" id="q7a" value="wrong_price">
-          <label for="q7a"><span class="option-check"></span>Λανθασμένες τιμές / τιμές που εμφανίζονται ως μηδέν</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q7_issues" id="q7b" value="stock_mismatch">
-          <label for="q7b"><span class="option-check"></span>Λανθασμένη διαθεσιμότητα stock</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q7_issues" id="q7c" value="order_fail">
-          <label for="q7c"><span class="option-check"></span>Αποτυχία υποβολής παραγγελίας</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q7_issues" id="q7d" value="slow_load">
-          <label for="q7d"><span class="option-check"></span>Αργή φόρτωση σελίδων</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q7_issues" id="q7e" value="login_issue">
-          <label for="q7e"><span class="option-check"></span>Πρόβλημα σύνδεσης / κωδικού</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q7_issues" id="q7f" value="missing_products">
-          <label for="q7f"><span class="option-check"></span>Δεν βρίσκω προϊόντα που γνωρίζω ότι υπάρχουν</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q7_issues" id="q7g" value="discount_issue">
-          <label for="q7g"><span class="option-check"></span>Εκπτώσεις που δεν εμφανίζονται σωστά</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q7_issues" id="q7h" value="none">
-          <label for="q7h"><span class="option-check"></span>✅ Δεν αντιμετώπισα κανένα πρόβλημα</label>
-        </div>
-      </div>
-    </div>
+<div class="section"><div class="sec-head"><div class="sec-num">3</div><div class="sec-title">Αναζήτηση προϊόντων</div></div><div class="sec-body">
 
-    <!-- Q8: Problem description -->
-    <div class="question">
-      <div class="q-label"><span class="q-num">8</span><span>Αν αντιμετωπίσατε κάποιο πρόβλημα, περιγράψτε το με λίγα λόγια:</span></div>
-      <textarea name="q8_problem_desc" placeholder="π.χ. «Όταν προσπαθώ να προσθέσω προϊόν Χ στο καλάθι, εμφανίζεται μήνυμα σφάλματος…»" rows="3"></textarea>
-    </div>
+<div class="q"><label class="q-label">Η αναζήτηση σάς βοηθά να βρίσκετε γρήγορα τα προϊόντα;</label>
+<div class="stars" data-target="val-3-1"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+<input type="hidden" name="3.1_αναζήτηση" id="val-3-1">
+<div class="stars-endpoints"><span>Καθόλου</span><span>Πολύ</span></div></div>
 
-  </div>
+<div class="q"><label class="q-label">Έχετε παρατηρήσει περιπτώσεις που δεν εμφανίζεται το σωστό προϊόν;</label>
+<div class="pills">
+<input type="radio" id="y32a" name="3.2_λάθος_αποτελέσματα" value="Ναι" data-cond="c32"><label for="y32a">Ναι</label>
+<input type="radio" id="y32b" name="3.2_λάθος_αποτελέσματα" value="Όχι" data-cond=""><label for="y32b">Όχι</label>
+</div>
+<div class="cond" id="c32"><textarea name="3.2_παραδείγματα" placeholder="Δώστε παραδείγματα αν θυμάστε..."></textarea></div></div>
 
-  <!-- ══ SECTION 4: Content & Prices ══ -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-icon">💰</div>
-      <div>
-        <div class="section-title">Τιμές & Προϊόντα</div>
-        <div class="section-subtitle">Η ακρίβεια των πληροφοριών που βλέπετε</div>
-      </div>
-    </div>
+<div class="q"><label class="q-label">Προτιμάτε αναζήτηση με... (επιλέξτε όσα θέλετε)</label>
+<div class="checks">
+<label class="check-opt"><input type="checkbox" name="3.3_αναζήτηση_μέθοδοι" value="Όνομα προϊόντος"><span>Όνομα προϊόντος</span></label>
+<label class="check-opt"><input type="checkbox" name="3.3_αναζήτηση_μέθοδοι" value="Barcode"><span>Barcode</span></label>
+<label class="check-opt"><input type="checkbox" name="3.3_αναζήτηση_μέθοδοι" value="Δραστική ουσία"><span>Δραστική ουσία</span></label>
+</div></div>
 
-    <!-- Q9: Price accuracy -->
-    <div class="question" id="q9">
-      <div class="q-label"><span class="q-num">9</span><span>Οι τιμές που εμφανίζονται αντιστοιχούν στις πραγματικές τιμές σας;<span class="q-required">*</span></span></div>
-      <div class="options-grid">
-        <div class="option-item">
-          <input type="radio" name="q9_prices" id="q9a" value="always">
-          <label for="q9a"><span class="option-check"></span>Πάντα</label>
-        </div>
-        <div class="option-item">
-          <input type="radio" name="q9_prices" id="q9b" value="mostly">
-          <label for="q9b"><span class="option-check"></span>Ως επί το πλείστον</label>
-        </div>
-        <div class="option-item">
-          <input type="radio" name="q9_prices" id="q9c" value="sometimes">
-          <label for="q9c"><span class="option-check"></span>Μερικές φορές όχι</label>
-        </div>
-        <div class="option-item">
-          <input type="radio" name="q9_prices" id="q9d" value="often_wrong">
-          <label for="q9d"><span class="option-check"></span>Συχνά λανθασμένες</label>
-        </div>
-      </div>
-    </div>
+<div class="q"><label class="q-label">Πόσο ικανοποιημένοι είστε από τα αποτελέσματα αναζήτησης; (0-10)</label>
+<div class="nps">
+<input type="radio" id="n31-0" name="3.4_ικανοποίηση_αναζήτησης" value="0"><label for="n31-0">0</label><input type="radio" id="n31-1" name="3.4_ικανοποίηση_αναζήτησης" value="1"><label for="n31-1">1</label><input type="radio" id="n31-2" name="3.4_ικανοποίηση_αναζήτησης" value="2"><label for="n31-2">2</label><input type="radio" id="n31-3" name="3.4_ικανοποίηση_αναζήτησης" value="3"><label for="n31-3">3</label><input type="radio" id="n31-4" name="3.4_ικανοποίηση_αναζήτησης" value="4"><label for="n31-4">4</label><input type="radio" id="n31-5" name="3.4_ικανοποίηση_αναζήτησης" value="5"><label for="n31-5">5</label><input type="radio" id="n31-6" name="3.4_ικανοποίηση_αναζήτησης" value="6"><label for="n31-6">6</label><input type="radio" id="n31-7" name="3.4_ικανοποίηση_αναζήτησης" value="7"><label for="n31-7">7</label><input type="radio" id="n31-8" name="3.4_ικανοποίηση_αναζήτησης" value="8"><label for="n31-8">8</label><input type="radio" id="n31-9" name="3.4_ικανοποίηση_αναζήτησης" value="9"><label for="n31-9">9</label><input type="radio" id="n31-10" name="3.4_ικανοποίηση_αναζήτησης" value="10"><label for="n31-10">10</label>
+</div>
+<div class="nps-endpoints"><span>Καθόλου</span><span>Πολύ</span></div></div>
 
-    <!-- Q10: Product catalog completeness -->
-    <div class="question" id="q10">
-      <div class="q-label"><span class="q-num">10</span><span>Βρίσκετε τα προϊόντα που χρειάζεστε στον κατάλογο;</span></div>
-      <div class="options-grid">
-        <div class="option-item">
-          <input type="radio" name="q10_catalog" id="q10a" value="always">
-          <label for="q10a"><span class="option-check"></span>Πάντα</label>
-        </div>
-        <div class="option-item">
-          <input type="radio" name="q10_catalog" id="q10b" value="mostly">
-          <label for="q10b"><span class="option-check"></span>Σχεδόν πάντα</label>
-        </div>
-        <div class="option-item">
-          <input type="radio" name="q10_catalog" id="q10c" value="sometimes">
-          <label for="q10c"><span class="option-check"></span>Μερικές φορές λείπουν</label>
-        </div>
-        <div class="option-item">
-          <input type="radio" name="q10_catalog" id="q10d" value="often_missing">
-          <label for="q10d"><span class="option-check"></span>Συχνά δεν τα βρίσκω</label>
-        </div>
-      </div>
-    </div>
+</div></div>
 
-  </div>
+<div class="section"><div class="sec-head"><div class="sec-num">4</div><div class="sec-title">Προσφορές & εμπορική πληροφορία</div></div><div class="sec-body">
 
-  <!-- ══ SECTION 5: NPS & Improvements ══ -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-icon">🚀</div>
-      <div>
-        <div class="section-title">Σύσταση & Βελτιώσεις</div>
-        <div class="section-subtitle">Τι θα θέλατε να δείτε στο μέλλον;</div>
-      </div>
-    </div>
+<div class="q"><label class="q-label">Βρίσκετε εύκολα τις προσφορές;</label>
+<div class="stars" data-target="val-4-1"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+<input type="hidden" name="4.1_ευκολία_προσφορών" id="val-4-1">
+<div class="stars-endpoints"><span>Καθόλου</span><span>Πολύ εύκολα</span></div></div>
 
-    <!-- Q11: NPS -->
-    <div class="question" id="q11">
-      <div class="q-label"><span class="q-num">11</span><span>Πόσο πιθανό είναι να συνιστούσατε το B2B της Pharmastock σε συνάδελφο;<span class="q-required">*</span></span></div>
-      <div class="nps-scale" id="nps-q11">
-        <button type="button" class="nps-btn" data-v="0">0</button>
-        <button type="button" class="nps-btn" data-v="1">1</button>
-        <button type="button" class="nps-btn" data-v="2">2</button>
-        <button type="button" class="nps-btn" data-v="3">3</button>
-        <button type="button" class="nps-btn" data-v="4">4</button>
-        <button type="button" class="nps-btn" data-v="5">5</button>
-        <button type="button" class="nps-btn" data-v="6">6</button>
-        <button type="button" class="nps-btn" data-v="7">7</button>
-        <button type="button" class="nps-btn" data-v="8">8</button>
-        <button type="button" class="nps-btn" data-v="9">9</button>
-        <button type="button" class="nps-btn" data-v="10">10</button>
-      </div>
-      <div class="nps-labels">
-        <span>😞 Καθόλου πιθανό</span>
-        <span>😍 Απολύτως πιθανό</span>
-      </div>
-      <div class="field-error">Παρακαλώ επιλέξτε βαθμολογία.</div>
-      <input type="hidden" name="q11_nps" id="val-q11">
-    </div>
+<div class="q"><label class="q-label">Οι προσφορές είναι κατανοητές (τιμή, όροι, ποσότητες);</label>
+<div class="stars" data-target="val-4-2"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+<input type="hidden" name="4.2_κατανόηση_προσφορών" id="val-4-2">
+<div class="stars-endpoints"><span>Καθόλου</span><span>Απόλυτα</span></div></div>
 
-    <!-- Q12: What to improve -->
-    <div class="question">
-      <div class="q-label"><span class="q-num">12</span><span>Τι θα θέλατε να βελτιωθεί ή να προστεθεί; <em style="font-weight:400;color:var(--text-muted)">(επιλέξτε όσα θέλετε)</em></span></div>
-      <div class="options-grid single-col">
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q12_improve" id="q12a" value="speed">
-          <label for="q12a"><span class="option-check"></span>Ταχύτερη φόρτωση</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q12_improve" id="q12b" value="mobile">
-          <label for="q12b"><span class="option-check"></span>Καλύτερη εμφάνιση σε κινητό</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q12_improve" id="q12c" value="search">
-          <label for="q12c"><span class="option-check"></span>Πιο έξυπνη αναζήτηση προϊόντων</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q12_improve" id="q12d" value="history">
-          <label for="q12d"><span class="option-check"></span>Καλύτερο ιστορικό παραγγελιών</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q12_improve" id="q12e" value="notifications">
-          <label for="q12e"><span class="option-check"></span>Ειδοποιήσεις για διαθεσιμότητα / προσφορές</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q12_improve" id="q12f" value="invoices">
-          <label for="q12f"><span class="option-check"></span>Πρόσβαση σε τιμολόγια / παραστατικά</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q12_improve" id="q12g" value="favorites">
-          <label for="q12g"><span class="option-check"></span>Λίστα αγαπημένων / γρήγορη επαναπαραγγελία</label>
-        </div>
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q12_improve" id="q12h" value="support">
-          <label for="q12h"><span class="option-check"></span>Live chat / υποστήριξη μέσα από το B2B</label>
-        </div>
-      </div>
-    </div>
+<div class="q"><label class="q-label">Σας έχει συμβεί να μπείτε σε προσφορά και να δείτε λάθος προϊόντα;</label>
+<div class="pills">
+<input type="radio" id="y43a" name="4.3_λάθος_προσφορά" value="Ναι" data-cond="c43"><label for="y43a">Ναι</label>
+<input type="radio" id="y43b" name="4.3_λάθος_προσφορά" value="Όχι" data-cond=""><label for="y43b">Όχι</label>
+</div>
+<div class="cond" id="c43"><textarea name="4.3_περιγραφή" placeholder="Περιγράψτε τι συνέβη..."></textarea></div></div>
 
-    <!-- Q13: Open feedback -->
-    <div class="question">
-      <div class="q-label"><span class="q-num">13</span><span>Ελεύθερα σχόλια, προτάσεις ή οτιδήποτε άλλο θέλετε να μας πείτε:</span></div>
-      <textarea name="q13_freetext" placeholder="Γράψτε ελεύθερα — κάθε σχόλιο μετράει για εμάς!" rows="4"></textarea>
-    </div>
+<div class="q"><label class="q-label">Τι θα θέλατε στις προσφορές; (επιλέξτε όσα θέλετε)</label>
+<div class="checks">
+<label class="check-opt"><input type="checkbox" name="4.4_βελτιώσεις_προσφορών" value="Καλύτερη προβολή προσφορών"><span>Καλύτερη προβολή προσφορών</span></label>
+<label class="check-opt"><input type="checkbox" name="4.4_βελτιώσεις_προσφορών" value="Φίλτρα"><span>Φίλτρα προσφορών</span></label>
+<label class="check-opt"><input type="checkbox" name="4.4_βελτιώσεις_προσφορών" value="Προσωποποιημένες προσφορές"><span>Προσωποποιημένες προσφορές</span></label>
+</div></div>
 
-  </div>
+</div></div>
 
-  <!-- ══ SECTION 6: Contact (optional) ══ -->
-  <div class="section">
-    <div class="section-header">
-      <div class="section-icon">💬</div>
-      <div>
-        <div class="section-title">Επικοινωνία <span style="font-family:'DM Sans';font-size:13px;color:var(--text-muted);font-weight:400;">(προαιρετικό)</span></div>
-        <div class="section-subtitle">Αν θέλετε να επικοινωνήσουμε μαζί σας για τα σχόλιά σας</div>
-      </div>
-    </div>
+<div class="section"><div class="sec-head"><div class="sec-num">5</div><div class="sec-title">Διαδικασία παραγγελίας</div></div><div class="sec-body">
 
-    <div class="question">
-      <div class="q-label"><span class="q-num">14</span><span>Επωνυμία φαρμακείου / εταιρείας:</span></div>
-      <input type="text" name="q14_pharmacy" placeholder="π.χ. Φαρμακείο Παπαδόπουλου">
-    </div>
+<div class="q"><label class="q-label">Πόσο εύκολη ήταν η διαδικασία παραγγελίας;</label>
+<div class="stars" data-target="val-5-1"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+<input type="hidden" name="5.1_ευκολία_παραγγελίας" id="val-5-1">
+<div class="stars-endpoints"><span>Πολύ δύσκολη</span><span>Πολύ εύκολη</span></div>
+<button type="button" class="reason-btn" data-open="r-5-1"><span class="plus">+</span>Προσθέστε σχόλιο (προαιρετικό)</button>
+<div class="reason-wrap" id="r-5-1"><textarea name="5.1_σχόλιο" placeholder="Μοιραστείτε την εμπειρία σας..."></textarea></div></div>
 
-    <div class="question">
-      <div class="q-label"><span class="q-num">15</span><span>Email επικοινωνίας:</span></div>
-      <input type="email" name="q15_email" placeholder="pharmacy@example.gr">
-    </div>
+<div class="q"><label class="q-label">Υπήρξε κάποιο σημείο που σας δυσκόλεψε;</label>
+<textarea name="5.2_δυσκολία" placeholder="Προαιρετικό — περιγράψτε πού κολλήσατε..."></textarea></div>
 
-    <!-- Contact permission -->
-    <div class="question" style="margin-bottom:0;">
-      <div class="options-grid single-col">
-        <div class="option-item checkbox">
-          <input type="checkbox" name="q16_contact_ok" id="q16" value="yes">
-          <label for="q16"><span class="option-check"></span>Συμφωνώ να επικοινωνήσει μαζί μου η ομάδα της Pharmastock για τα σχόλιά μου</label>
-        </div>
-      </div>
-    </div>
+<div class="q"><label class="q-label">Πόσο χρόνο σας παίρνει να ολοκληρώσετε μια παραγγελία;</label>
+<div class="pills">
+<input type="radio" id="t5a" name="5.3_χρόνος" value="Λιγότερο από 2 λεπτά"><label for="t5a">< 2 λεπτά</label>
+<input type="radio" id="t5b" name="5.3_χρόνος" value="2-5 λεπτά"><label for="t5b">2-5 λεπτά</label>
+<input type="radio" id="t5c" name="5.3_χρόνος" value="5-10 λεπτά"><label for="t5c">5-10 λεπτά</label>
+<input type="radio" id="t5d" name="5.3_χρόνος" value="Πάνω από 10 λεπτά"><label for="t5d">> 10 λεπτά</label>
+</div></div>
 
-  </div>
+<div class="q"><label class="q-label">Νιώθετε σιγουριά ότι η παραγγελία καταχωρήθηκε σωστά;</label>
+<div class="stars" data-target="val-5-4"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+<input type="hidden" name="5.4_σιγουριά_καταχώρησης" id="val-5-4">
+<div class="stars-endpoints"><span>Καθόλου</span><span>Απόλυτα</span></div></div>
 
-  <!-- SUBMIT -->
-  <div class="submit-section">
-    <button type="submit" class="submit-btn">Υποβολή Αξιολόγησης ✓</button>
-    <div class="submit-note">Τα στοιχεία σας παραμένουν εμπιστευτικά και χρησιμοποιούνται μόνο για βελτίωση της υπηρεσίας.</div>
-  </div>
+</div></div>
 
-  <!-- THANK YOU -->
-  <div class="thankyou" id="thankyou">
-    <div class="thankyou-icon">🎉</div>
-    <h2>Ευχαριστούμε πολύ!</h2>
-    <p>Η αξιολόγησή σας καταχωρήθηκε επιτυχώς. Η ομάδα μας θα μελετήσει τα σχόλιά σας και θα εργαστεί για τη βελτίωση της πλατφόρμας.</p>
-  </div>
+<div class="section"><div class="sec-head"><div class="sec-num">6</div><div class="sec-title">Ταχύτητα & απόδοση</div></div><div class="sec-body">
+
+<div class="q"><label class="q-label">Πόσο γρήγορα φορτώνει η πλατφόρμα;</label>
+<div class="stars" data-target="val-6-1"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+<input type="hidden" name="6.1_ταχύτητα" id="val-6-1">
+<div class="stars-endpoints"><span>Πολύ αργά</span><span>Πολύ γρήγορα</span></div></div>
+
+<div class="q"><label class="q-label">Έχετε παρατηρήσει καθυστερήσεις ή κολλήματα;</label>
+<div class="pills">
+<input type="radio" id="y62a" name="6.2_καθυστερήσεις" value="Ναι" data-cond="c62"><label for="y62a">Ναι</label>
+<input type="radio" id="y62b" name="6.2_καθυστερήσεις" value="Όχι" data-cond=""><label for="y62b">Όχι</label>
+</div>
+<div class="cond" id="c62"><textarea name="6.2_σημεία_lag" placeholder="Σε ποια σημεία παρατηρείται το πρόβλημα;"></textarea></div></div>
+
+</div></div>
+
+<div class="section"><div class="sec-head"><div class="sec-num">7</div><div class="sec-title">Εμπιστοσύνη & αξιοπιστία</div></div><div class="sec-body">
+
+<div class="q"><label class="q-label">Εμπιστεύεστε τα στοιχεία που βλέπετε (stock, τιμές, προσφορές);</label>
+<div class="stars" data-target="val-7-1"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+<input type="hidden" name="7.1_εμπιστοσύνη" id="val-7-1">
+<div class="stars-endpoints"><span>Καθόλου</span><span>Απόλυτα</span></div></div>
+
+<div class="q"><label class="q-label">Έχετε εντοπίσει λάθη ή ασυμφωνίες (π.χ. με τιμολόγια, παραγγελίες);</label>
+<div class="pills">
+<input type="radio" id="y72a" name="7.2_λάθη" value="Ναι" data-cond="c72"><label for="y72a">Ναι</label>
+<input type="radio" id="y72b" name="7.2_λάθη" value="Όχι" data-cond=""><label for="y72b">Όχι</label>
+</div>
+<div class="cond" id="c72"><textarea name="7.2_λάθη_περιγραφή" placeholder="Περιγράψτε τι εντοπίσατε..."></textarea></div></div>
+
+</div></div>
+
+<div class="section"><div class="sec-head"><div class="sec-num">8</div><div class="sec-title">Σύγκριση με άλλες πλατφόρμες</div></div><div class="sec-body">
+
+<div class="q"><label class="q-label">Χρησιμοποιείτε άλλα B2B από φαρμακαποθήκες;</label>
+<div class="pills">
+<input type="radio" id="y81a" name="8.1_άλλα_b2b" value="Ναι" data-cond="c81"><label for="y81a">Ναι</label>
+<input type="radio" id="y81b" name="8.1_άλλα_b2b" value="Όχι" data-cond=""><label for="y81b">Όχι</label>
+</div>
+<div class="cond" id="c81">
+<div style="margin-bottom:10px"><label class="q-label" style="font-weight:400;font-size:13.5px;margin-bottom:6px">Τι κάνουν καλύτερα από εμάς;</label>
+<textarea name="8.2_άλλοι_καλύτερα" placeholder="Τι σας αρέσει σε άλλες πλατφόρμες..."></textarea></div>
+<div><label class="q-label" style="font-weight:400;font-size:13.5px;margin-bottom:6px">Τι κάνουμε καλύτερα εμείς;</label>
+<textarea name="8.3_εμείς_καλύτερα" placeholder="Σε τι διαφέρουμε θετικά..."></textarea></div>
+</div></div>
+
+</div></div>
+
+<div class="section"><div class="sec-head"><div class="sec-num">9</div><div class="sec-title">Προτάσεις & λειτουργίες που λείπουν</div></div><div class="sec-body">
+
+<div class="q"><label class="q-label">Τι θα θέλατε να έχει το σύστημα και δεν έχει;</label>
+<textarea name="9.1_τι_λείπει" placeholder="Προαιρετικό — γράψτε ό,τι σας έρχεται στο μυαλό..."></textarea></div>
+
+<div class="q"><label class="q-label">Ποια λειτουργία θα σας εξοικονομούσε περισσότερο χρόνο;</label>
+<textarea name="9.2_χρονοεξοικονόμηση" placeholder="Προαιρετικό — μια λειτουργία που λείπει..."></textarea></div>
+
+<div class="q"><label class="q-label">Θα θέλατε κάποια από τα παρακάτω;</label>
+<div class="checks">
+<label class="check-opt"><input type="checkbox" name="9.3_features" value="Λίστες αγαπημένων"><span>Λίστες αγαπημένων</span></label>
+<label class="check-opt"><input type="checkbox" name="9.3_features" value="Ιστορικό αγορών"><span>Ιστορικό αγορών</span></label>
+<label class="check-opt"><input type="checkbox" name="9.3_features" value="Προτάσεις αναπλήρωσης"><span>Προτάσεις αναπλήρωσης</span></label>
+</div></div>
+
+</div></div>
+
+<div class="section"><div class="sec-head"><div class="sec-num">10</div><div class="sec-title">Τελική αξιολόγηση</div></div><div class="sec-body">
+
+<div class="q" id="q10-1"><label class="q-label q-req">Βαθμολογήστε συνολικά το B2B (0-10)</label>
+<div class="nps">
+<input type="radio" id="f10-0" name="10.1_τελική_βαθμολογία" value="0"><label for="f10-0">0</label><input type="radio" id="f10-1" name="10.1_τελική_βαθμολογία" value="1"><label for="f10-1">1</label><input type="radio" id="f10-2" name="10.1_τελική_βαθμολογία" value="2"><label for="f10-2">2</label><input type="radio" id="f10-3" name="10.1_τελική_βαθμολογία" value="3"><label for="f10-3">3</label><input type="radio" id="f10-4" name="10.1_τελική_βαθμολογία" value="4"><label for="f10-4">4</label><input type="radio" id="f10-5" name="10.1_τελική_βαθμολογία" value="5"><label for="f10-5">5</label><input type="radio" id="f10-6" name="10.1_τελική_βαθμολογία" value="6"><label for="f10-6">6</label><input type="radio" id="f10-7" name="10.1_τελική_βαθμολογία" value="7"><label for="f10-7">7</label><input type="radio" id="f10-8" name="10.1_τελική_βαθμολογία" value="8"><label for="f10-8">8</label><input type="radio" id="f10-9" name="10.1_τελική_βαθμολογία" value="9"><label for="f10-9">9</label><input type="radio" id="f10-10" name="10.1_τελική_βαθμολογία" value="10"><label for="f10-10">10</label>
+</div>
+<div class="nps-endpoints"><span>Καθόλου ικανοποιημένοι</span><span>Πολύ ικανοποιημένοι</span></div></div>
+
+<div class="q"><label class="q-label">Τι θα έπρεπε να βελτιωθεί για να γίνει 10;</label>
+<textarea name="10.2_βελτίωση_για_10" placeholder="Προαιρετικό — η πιο σημαντική βελτίωση..."></textarea></div>
+
+<div class="q"><label class="q-label" style="margin-bottom:6px">Στοιχεία επικοινωνίας (προαιρετικά)</label>
+<div style="display:grid;gap:10px">
+<input type="text" name="10.3_φαρμακείο" placeholder="Επωνυμία φαρμακείου">
+<input type="email" name="10.3_email" placeholder="Email επικοινωνίας">
+</div>
+<p style="font-size:12px;color:var(--text-muted);margin-top:6px">Μόνο αν θέλετε follow-up από εμάς για τις απαντήσεις σας.</p></div>
+
+</div></div>
+
+<div class="submit-wrap">
+<button type="submit" class="submit-btn">Υποβολή Αξιολόγησης</button>
+</div>
 
 </form>
+
+<div id="thankyou">
+<div class="icon">✓</div>
+<h2>Ευχαριστούμε!</h2>
+<p>Η γνώμη σας έχει καταχωρηθεί και θα μας βοηθήσει να βελτιώσουμε το B2B.</p>
+<p><strong>Pharmastock A.E.</strong></p>
+</div>
+
+<div class="footer">
+<strong>Pharmastock A.E.</strong> — Γ. Παπανδρέου 68, Χαϊδάρι Αθήνα · 210 581 6220 · support@pharmastock.gr
 </div>
 
 <script>
-  // ── STAR RATINGS ──
-  const starGroups = ['q1','q3','q4','q6'];
-  starGroups.forEach(id => {
-    const container = document.getElementById('stars-' + id);
-    const hidden    = document.getElementById('val-' + id);
-    const hint      = document.getElementById('star-hint-' + id);
-    const labels    = ['','Πολύ κακό','Κακό','Μέτριο','Καλό','Εξαιρετικό'];
-    if (!container) return;
-    const btns = container.querySelectorAll('.star-btn');
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const v = +btn.dataset.val;
+(function(){
+  const FORMSPREE = 'https://formspree.io/f/xkokzpwn';
+  
+  // Star rating logic
+  document.querySelectorAll('.stars').forEach(stars => {
+    const targetId = stars.dataset.target;
+    const hidden = document.getElementById(targetId);
+    const spans = stars.querySelectorAll('span');
+    
+    spans.forEach(span => {
+      span.addEventListener('mouseenter', () => {
+        const v = parseInt(span.dataset.v);
+        spans.forEach((s, i) => s.classList.toggle('filled', i < v));
+      });
+      span.addEventListener('click', () => {
+        const v = parseInt(span.dataset.v);
         hidden.value = v;
-        btns.forEach(b => b.classList.toggle('active', +b.dataset.val <= v));
-        hint.textContent = '⭐'.repeat(v) + ' — ' + labels[v];
-        hint.style.color = 'var(--green-mid)';
-        document.getElementById(id)?.classList.remove('has-error');
+        stars.dataset.value = v;
+        spans.forEach((s, i) => s.classList.toggle('filled', i < v));
+        // Remove error state if present
+        stars.closest('.q')?.classList.remove('has-error');
+        updateProgress();
       });
     });
-  });
-
-  // ── NPS ──
-  document.querySelectorAll('.nps-scale').forEach(scale => {
-    const hidden = document.getElementById('val-q11');
-    scale.querySelectorAll('.nps-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        scale.querySelectorAll('.nps-btn').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        if (hidden) hidden.value = btn.dataset.v;
-        document.getElementById('q11')?.classList.remove('has-error');
-      });
+    
+    stars.addEventListener('mouseleave', () => {
+      const v = parseInt(stars.dataset.value) || 0;
+      spans.forEach((s, i) => s.classList.toggle('filled', i < v));
     });
   });
-
-  // ── PROGRESS ──
+  
+  // Reason toggle
+  document.querySelectorAll('.reason-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.open);
+      const isOpen = target.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+    });
+  });
+  
+  // Conditional textareas (Yes/No)
+  document.querySelectorAll('input[data-cond]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      const condId = radio.dataset.cond;
+      // Find all conditionals in the same question and close them
+      const parent = radio.closest('.q');
+      parent.querySelectorAll('.cond').forEach(c => c.classList.remove('open'));
+      if (condId) {
+        const target = document.getElementById(condId);
+        if (target) target.classList.add('open');
+      }
+      updateProgress();
+    });
+  });
+  
+  // NPS / radio / checkbox change handlers for progress
+  document.querySelectorAll('input[type=radio], input[type=checkbox], textarea, input[type=text], input[type=email]').forEach(el => {
+    el.addEventListener('change', updateProgress);
+    if (el.tagName === 'TEXTAREA' || el.type === 'text' || el.type === 'email') {
+      el.addEventListener('input', updateProgress);
+    }
+  });
+  
+  // Progress calculation
   function updateProgress() {
-    const required = ['val-q1','val-q3','val-q4','val-q6','val-q11'];
-    const radios   = ['q2_frequency','q9_prices'];
-    let filled = 0, total = required.length + radios.length;
-    required.forEach(id => { if (document.getElementById(id)?.value) filled++; });
-    radios.forEach(name => { if (document.querySelector(`input[name="${name}"]:checked`)) filled++; });
-    const pct = Math.round((filled / total) * 100);
+    const allQs = document.querySelectorAll('.q');
+    let answered = 0;
+    allQs.forEach(q => {
+      const hasStars = q.querySelector('.stars');
+      const hasRadio = q.querySelector('input[type=radio]:checked');
+      const hasCheck = q.querySelector('input[type=checkbox]:checked');
+      const textArea = q.querySelector('textarea, input[type=text], input[type=email]');
+      const textHasVal = textArea && textArea.value.trim().length > 0;
+      
+      if (hasStars) {
+        const hidden = q.querySelector('input[type=hidden]');
+        if (hidden && hidden.value) answered++;
+      } else if (hasRadio || hasCheck || textHasVal) {
+        answered++;
+      }
+    });
+    const pct = Math.round((answered / allQs.length) * 100);
     document.getElementById('progressFill').style.width = pct + '%';
     document.getElementById('progressLabel').textContent = pct + '%';
   }
-  document.getElementById('surveyForm').addEventListener('change', updateProgress);
-  document.getElementById('surveyForm').addEventListener('click', updateProgress);
-
-  // ── SUBMIT ──
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkokzpwn';
-
+  
+  // Form submission
   document.getElementById('surveyForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-
-    // Validate required questions
-    const requiredStars = [
-      {id:'q1', val:'val-q1'},
-      {id:'q3', val:'val-q3'},
-      {id:'q4', val:'val-q4'},
-      {id:'q6', val:'val-q6'},
-    ];
+    
+    // Validate required questions: only q1-1 and q10-1
     let valid = true;
-
-    requiredStars.forEach(({id, val}) => {
-      const el = document.getElementById(id);
-      if (!document.getElementById(val).value) {
-        el?.classList.add('has-error');
-        valid = false;
-      }
-    });
-
-    if (!document.getElementById('val-q11').value) {
-      document.getElementById('q11')?.classList.add('has-error');
+    const q11 = document.getElementById('q1-1');
+    const q101 = document.getElementById('q10-1');
+    
+    if (!document.getElementById('val-1-1').value) {
+      q11?.classList.add('has-error');
       valid = false;
     }
-
+    if (!document.querySelector('input[name="10.1_τελική_βαθμολογία"]:checked')) {
+      q101?.classList.add('has-error');
+      valid = false;
+    }
+    
     if (!valid) {
-      const firstError = document.querySelector('.has-error');
-      firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const firstErr = document.querySelector('.has-error');
+      firstErr?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
-
-    // Collect data for submission
-    const formData = new FormData(this);
-
-    // Group checkbox values (multiple values per name) into readable strings
+    
+    // Collect data
+    const data = new FormData(this);
     const grouped = {};
-    for (let [k, v] of formData.entries()) {
-      if (grouped[k]) {
-        grouped[k] = grouped[k] + ', ' + v;
-      } else {
-        grouped[k] = v;
-      }
+    for (let [k, v] of data.entries()) {
+      if (grouped[k]) grouped[k] = grouped[k] + ', ' + v;
+      else grouped[k] = v;
     }
-
-    // Disable submit button and show loading state
-    const submitBtn = this.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.6';
-    submitBtn.style.cursor = 'wait';
-    submitBtn.textContent = 'Αποστολή...';
-
+    
+    const btn = this.querySelector('.submit-btn');
+    const origTxt = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Αποστολή...';
+    
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(FORMSPREE, {
         method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify(grouped)
       });
-
-      if (response.ok) {
-        // Success! Show thank you screen
-        this.querySelectorAll('.section, .submit-section').forEach(el => {
-          el.style.display = 'none';
-        });
-        document.getElementById('thankyou').classList.add('visible');
+      
+      if (res.ok) {
+        this.style.display = 'none';
+        document.getElementById('thankyou').classList.add('show');
         document.getElementById('progressFill').style.width = '100%';
         document.getElementById('progressLabel').textContent = '100%';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        // Formspree returned an error
-        const data = await response.json().catch(() => ({}));
-        const errorMsg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Παρουσιάστηκε σφάλμα κατά την υποβολή.';
-        throw new Error(errorMsg);
+        throw new Error('Submit failed');
       }
     } catch (err) {
-      // Network error or Formspree error
-      console.error('Submission error:', err);
-
-      // Restore button
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = '';
-      submitBtn.style.cursor = '';
-      submitBtn.textContent = originalText;
-
-      // Show error message
-      alert('⚠️ Δεν ήταν δυνατή η υποβολή της αξιολόγησης.\n\nΠαρακαλώ ελέγξτε τη σύνδεσή σας στο internet και δοκιμάστε ξανά.\n\nΑν το πρόβλημα παραμένει, επικοινωνήστε μαζί μας στο 210 581 6220.');
+      btn.disabled = false;
+      btn.textContent = origTxt;
+      alert('⚠️ Δεν ήταν δυνατή η υποβολή.\n\nΠαρακαλώ ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.\n\nΑν το πρόβλημα παραμένει: 210 581 6220');
     }
   });
+})();
 </script>
 </body>
 </html>
